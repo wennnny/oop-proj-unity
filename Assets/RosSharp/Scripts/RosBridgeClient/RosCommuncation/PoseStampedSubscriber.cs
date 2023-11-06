@@ -20,9 +20,10 @@ namespace RosSharp.RosBridgeClient
     public class PoseStampedSubscriber : UnitySubscriber<MessageTypes.Geometry.PoseStamped>
     {
         public Transform PublishedTransform;
+        public TMPro.TextMeshPro text_obj;
 
-        private Vector3 position;
-        private Quaternion rotation;
+        private Vector2 position;
+        //private Quaternion rotation;
         private bool isMessageReceived;
 
         protected override void Start()
@@ -34,29 +35,30 @@ namespace RosSharp.RosBridgeClient
         {
             if (isMessageReceived)
                 ProcessMessage();
+
+            text_obj.text = "Position : " + position;
         }
 
         protected override void ReceiveMessage(MessageTypes.Geometry.PoseStamped message)
         {
             position = GetPosition(message).Ros2Unity();
-            rotation = GetRotation(message).Ros2Unity();
+            //rotation = GetRotation(message).Ros2Unity();
             isMessageReceived = true;
         }
 
         private void ProcessMessage()
         {
             PublishedTransform.position = position;
-            PublishedTransform.rotation = rotation;
+            //PublishedTransform.rotation = rotation;
         }
 
         private Vector3 GetPosition(MessageTypes.Geometry.PoseStamped message)
         {
-            return new Vector3(
+            return new Vector2(
                 (float)message.pose.position.x,
-                (float)message.pose.position.y,
                 (float)message.pose.position.z);
         }
-
+        /*
         private Quaternion GetRotation(MessageTypes.Geometry.PoseStamped message)
         {
             return new Quaternion(
@@ -65,5 +67,6 @@ namespace RosSharp.RosBridgeClient
                 (float)message.pose.orientation.z,
                 (float)message.pose.orientation.w);
         }
+        */
     }
 }

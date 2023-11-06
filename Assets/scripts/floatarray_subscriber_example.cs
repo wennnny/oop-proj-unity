@@ -25,7 +25,7 @@ namespace RosSharp.RosBridgeClient
             // Access the received Float64MultiArray data
             if (data != null)
             {
-                Debug.Log("Received Float64MultiArray: " + string.Join(", ", data));
+              //  Debug.Log("Received Float64MultiArray: " + string.Join(", ", data));
                 Transform_target.position = new Vector3((float)data[1], Transform_target.position.y , (float)data[0]);
                 
             }
