@@ -22,7 +22,6 @@ namespace RosSharp.RosBridgeClient
         {
             if (isMessageReceived)
                 ProcessMessage();
-
         }
 
         private void ProcessMessage()
@@ -30,7 +29,6 @@ namespace RosSharp.RosBridgeClient
             // Access the received Float64MultiArray data
             if (data != null)
             {
-                Debug.Log(data);
                 text_obj.text = data;
             }
             isMessageReceived = false;
